@@ -4,6 +4,15 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // Relative assets allow dist/ to be served from XAMPP subdirectories.
   base: './',
+  server: { open: '/app.html' },
+  build: {
+    assetsInlineLimit: Number.MAX_SAFE_INTEGER,
+    cssCodeSplit: false,
+    modulePreload: false,
+    rollupOptions: {
+      input: 'app.html',
+      output: { inlineDynamicImports: true },
+    },
+  },
 });
